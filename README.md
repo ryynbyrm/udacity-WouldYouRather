@@ -11,6 +11,6 @@ The application requires yarn install/npm install start the development server w
 
 ##Resources 
 Udacity React course classroom 
-React offical site
+React official site
 Stackoverflow
 Router: https://tylermcginnis.com
