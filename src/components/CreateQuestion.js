@@ -25,11 +25,14 @@ class CreateQuestion extends Component {
       return <Redirect to='/login' />
     }
     if (this.state.redirect) {
-      return <Redirect to='/leaderboard' />
+      return <Redirect to='/home' />
     }
     return (
       <div className="row">
       <form onSubmit={this.addQuestion}>
+          <div className="form-group">
+            <label>Would you Rather:</label>
+          </div>
           <div className="form-group">
             <label htmlFor="first">First Question</label>
             <input type="text" className="form-control" placeholder="Enter your first option"/>

@@ -1,19 +1,27 @@
 import React, { Component } from 'react'
+import Tabs from 'react-bootstrap/Tabs'
+import Tab from 'react-bootstrap/Tab'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import Question from './Question'
 
 class Home extends Component {
-
+  state = {
+    key: 'unanswered',
+  };
   render() {
     const { unanswered, answered, authedUser} = this.props
     if (authedUser === null) {
       return <Redirect to='/login' />
     }
       return (
-        <div className="row">
+        <Tabs
+          id="controlled-tab-example"
+          activeKey={this.state.key}
+          onSelect={key => this.setState({ key })}
+        >
+          <Tab eventKey="unanswered" title="Unanswered Question">
           <div className="card bg-light">
-            <div className="card-header">Unanswered Question</div>
             <div className="card-body">
             {unanswered.map((id) => (
                 <li key={id}>
@@ -22,17 +30,19 @@ class Home extends Component {
               ))}
               </div>
           </div> 
-          <div className="card bg-light">
-              <div className="card-header">Answered Question</div>
-              <div className="card-body">
-              {answered.map((id) => (
-                  <li key={id}>
-                    <Question id={id}/>
-                  </li>
-                ))}
-              </div>
+          </Tab>
+          <Tab eventKey="answered" title="Answered Question">
+            <div className="card bg-light">
+                <div className="card-body">
+                {answered.map((id) => (
+                    <li key={id}>
+                      <Question id={id}/>
+                    </li>
+                  ))}
+                </div>
             </div>
-        </div>
+          </Tab>
+        </Tabs>
       )
     }
   }
@@ -49,3 +59,4 @@ class Home extends Component {
     }
   }
   export default connect(mapStateToProps)(Home)
+

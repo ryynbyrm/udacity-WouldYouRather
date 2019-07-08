@@ -13,7 +13,8 @@ class Leaderboard extends Component {
     return (
       <div className="row">
       { list.map((user) => (
-        <Card user={user}
+        <Card user={user} 
+        key={user.id} 
         divClass="col-md-4"
         title={`${user.name}`} 
         firstText={"Questions: "+`${user.questionsCount}`}
@@ -27,9 +28,7 @@ class Leaderboard extends Component {
 function mapStateToProps ({ authedUser, users }) {
   return {
     authedUser,
-    list:Object.keys(users).sort(function (a, b) {
-      return (users[a].questions.length + users[b].answers.length) - (users[a].questions.length + users[b].answers.length)
-    }).map((userId)=>{
+    list:Object.keys(users).map((userId)=>{
         return{
           id: users[userId].id,
           name: users[userId].name,
@@ -37,6 +36,9 @@ function mapStateToProps ({ authedUser, users }) {
           questionsCount: users[userId].questions.length,
           answersCount: Object.keys(users[userId].answers).length
         }})
+        .sort(function (a, b) {
+          return (b.questionsCount + b.answersCount) - (a.questionsCount + a.answersCount)
+        })
   }
 }
 

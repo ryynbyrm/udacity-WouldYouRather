@@ -3,14 +3,18 @@ import CardHeader from './CardHeader'
 class Result extends React.Component {
     render() {
         const { user, question } = this.props
-        const onePerc = parseInt((question.optionOne.votes.length / (question.optionOne.votes.length + question.optionOne.votes.length)) * 100, 10)
-        const twoPerc = parseInt((question.optionTwo.votes.length / (question.optionOne.votes.length + question.optionOne.votes.length)) * 100, 10)
+        const optionOneVotes = question.optionOne.votes.length 
+        const optionTwoVotes = question.optionTwo.votes.length 
+        const total = optionOneVotes + optionTwoVotes
+        const onePerc = (optionOneVotes / total) * 100
+        const twoPerc = (optionTwoVotes / total) * 100
         return (
             <div key={user.id} className="col-md-12">
                 <div className="card">
                     <CardHeader user={user}></CardHeader> 
                     <div className="card-body">
                         <h5 className="card-title">{user.name}</h5>
+                        <p className="card-text">Would you Rather:</p>
                         <p className="card-text">
                             A: {question.optionOne.text}
                             {user.answers[question.id] === 'optionOne' ? 
@@ -28,10 +32,10 @@ class Result extends React.Component {
                         <div>
                         <br />
                         <p>
-                        A: {onePerc}% - {question.optionOne.text} | {question.optionOne.votes.length} votes
+                        A: {onePerc}% - {question.optionOne.text} | {optionOneVotes} votes
                         </p>
                         <p>
-                        B: {twoPerc}% - {question.optionTwo.text} | {question.optionTwo.votes.length} votes
+                        B: {twoPerc}% - {question.optionTwo.text} | {optionTwoVotes} votes
                         </p>
                     </div>
                     </div>

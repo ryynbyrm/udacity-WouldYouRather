@@ -6,9 +6,10 @@ class Card extends React.Component {
     const { user, divClass, title,firstText,secondText,thirdText, time  } = this.props
     return (
       <div key={user.id} className={divClass}>
-      <div className="card">
+      <div className="card" key={user.id} >
       <CardHeader user={user} />
       <CardBody 
+        key={user.id} 
         title={title} 
         time={time}
         firstText={firstText}

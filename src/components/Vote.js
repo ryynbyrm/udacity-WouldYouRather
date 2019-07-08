@@ -43,6 +43,9 @@ class Vote extends Component {
             <div className="card-body">
                 <h5 className="card-title">{user.name}</h5>
                 <p className="card-text">
+                Would you Rather:
+                </p>
+                <p className="card-text">
                 A: {question.optionOne.text}
                 <button className="btn btn-success" 
                 onClick={e => this.handleChoice('optionOne')}>Choose</button>
